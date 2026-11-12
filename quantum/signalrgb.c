@@ -117,17 +117,21 @@ void led_streaming(uint8_t *data) //Stream data from HID Packets to Keyboard.
       if (isIndicator) {
 
       #if defined(RGBLIGHT_ENABLE)
-      rgblight_setrgb_at(255, 255, 255, index + i);
+      rgblight_setrgb_at(21, 16, 23, index + i);
       #elif defined(RGB_MATRIX_ENABLE)
-      rgb_matrix_set_color(index + i, 255, 255, 255);
+      rgb_matrix_set_color(index + i, 21, 16, 23);
       #endif
 
       } else {
 
+      uint8_t r_capped = (uint8_t)(((uint16_t)r * 21) / 255);
+      uint8_t g_capped = (uint8_t)(((uint16_t)g * 16) / 255);
+      uint8_t b_capped = (uint8_t)(((uint16_t)b * 23) / 255);
+
       #if defined(RGBLIGHT_ENABLE)
-      rgblight_setrgb_at(r, g, b, index + i);
+      rgblight_setrgb_at(r_capped, g_capped, b_capped, index + i);
       #elif defined(RGB_MATRIX_ENABLE)
-      rgb_matrix_set_color(index + i, r, g, b);
+      rgb_matrix_set_color(index + i, r_capped, g_capped, b_capped);
       #endif
         }
      }
